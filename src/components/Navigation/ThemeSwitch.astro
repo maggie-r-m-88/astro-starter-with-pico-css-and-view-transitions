@@ -54,21 +54,55 @@
   }
 </style>
 <script>
-    function toggleTheme() {
-      const themeButton = document.querySelector(".icon-theme-toggle");
-      themeButton.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default link behavior
-        themeButton.classList.toggle("moon");
-        const isDarkMode = themeButton.classList.contains("moon") ? 'dark' : 'light';
-        document.documentElement.setAttribute("data-theme", isDarkMode);
-      });
+  function toggleTheme() {
+
+    const themeButton = document.querySelector(".icon-theme-toggle");
+
+    themeButton.addEventListener("click", function (event) {
+
+      event.preventDefault();
+
+      themeButton.classList.toggle("moon");
+
+      const theme = themeButton.classList.contains("moon") ? "dark" : "light";
+
+      localStorage.setItem("theme", theme);
+
+      document.documentElement.setAttribute("data-theme", theme);
+    });
+
+  }
+
+  function setDarkMode(document) {
+
+    let storedTheme = localStorage.getItem("theme");
+
+    document.documentElement.setAttribute("data-theme", storedTheme);
+
+    if (storedTheme === "dark") {
+
+      document.querySelector(".icon-theme-toggle").classList.add("moon");
+    
     }
-  
-    document.addEventListener("DOMContentLoaded", (event) => {
-      toggleTheme();
-    });
-  
-    document.addEventListener("astro:after-swap", () => {
-      toggleTheme();
-    });
-  </script>
+
+  }
+
+  document.addEventListener("DOMContentLoaded", (event) => {
+
+    setDarkMode(document);
+    toggleTheme();
+
+  });
+
+  document.addEventListener("astro:before-swap", (ev) => {
+
+    setDarkMode(ev.newDocument);
+
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+
+    toggleTheme();
+
+  });
+</script>
