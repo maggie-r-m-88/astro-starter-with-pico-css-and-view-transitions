@@ -87,12 +87,12 @@ const posts = (await getCollection('blog')).sort(
 	</head>
 	<body>
 		<Header />
-		<main>
+		<main class="container">
 			<section>
 				<ul>
 					{
 						posts.map((post) => (
-							<li>
+							<li mediaTransitionName={`media-image-${post.slug}`}>
 								<a href={`/blog/${post.slug}/`}>
 									<img width={720} height={360} src={post.data.heroImage} alt="" />
 									<h4 class="title">{post.data.title}</h4>
