@@ -54,19 +54,21 @@
   }
 </style>
 <script>
-  function toggleTheme() {
-    const themeButton = document.querySelector(".icon-theme-toggle");
-    themeButton.addEventListener("click", function (event) {
-      event.preventDefault(); // Prevent default link behavior
-      themeButton.classList.toggle("moon");
+    function toggleTheme() {
+      const themeButton = document.querySelector(".icon-theme-toggle");
+      themeButton.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        themeButton.classList.toggle("moon");
+        const isDarkMode = themeButton.classList.contains("moon") ? 'dark' : 'light';
+        document.documentElement.setAttribute("data-theme", isDarkMode);
+      });
+    }
+  
+    document.addEventListener("DOMContentLoaded", (event) => {
+      toggleTheme();
     });
-  }
-
-  document.addEventListener("DOMContentLoaded", (event) => {
-    toggleTheme();
-  });
-
-  document.addEventListener("astro:after-swap", () => {
-    toggleTheme();
-  });
-</script>
+  
+    document.addEventListener("astro:after-swap", () => {
+      toggleTheme();
+    });
+  </script>

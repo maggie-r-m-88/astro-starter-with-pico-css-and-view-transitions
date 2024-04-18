@@ -4,7 +4,7 @@ import ThemeSwitch from "./Navigation/ThemeSwitch.astro";
 import { SITE_TITLE } from "../consts";
 ---
 
-<header class="container">
+<header class="container" >
   <nav>
     <ul class="menu">
       <li><span class="header-title">Insight <strong>Forge</strong>.</span></li>
@@ -34,7 +34,7 @@ import { SITE_TITLE } from "../consts";
         >
       </li>
       <li>
-        <ThemeSwitch />
+        <ThemeSwitch  />
       </li>
     </ul>
   </nav>
@@ -45,7 +45,6 @@ header {
 	position: sticky;
 	top: 0;
 	z-index: 1000;
-	background-color: white;
 }
 
 .header-title {
@@ -120,7 +119,7 @@ nav {
 			transition:
 				stroke-dasharray 400ms,
 				stroke-dashoffset 400ms;
-			stroke: #000;
+			stroke: currentColor;
 			stroke-width: 3.5;
 			stroke-linecap: round;
 		}
@@ -169,10 +168,11 @@ nav {
 		}
 
 	}
-
+  
 	.links {
 		display: flex;
 		background: #1f1f1f;
+    background: light-dark(#1f1f1f, #ffffff);
 		flex-direction: column;
 		max-height: 0;
 		transition: max-height 0.3s ease-in-out;
@@ -189,7 +189,7 @@ nav {
 			margin-left: 0;
 
 			a {
-				color: #ffffff;
+        color: light-dark(#ffffff, #1f1f1f);
 				font-weight: bold;
 			}
 		}
