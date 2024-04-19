@@ -80,9 +80,11 @@
 
     let storedTheme = localStorage.getItem("theme");
     document.documentElement.setAttribute("data-theme", storedTheme);
+    const iconPath = document.querySelector('.icon-theme-toggle :first-child path');
 
     if (storedTheme === "dark") {
       document.querySelector(".icon-theme-toggle").classList.add("moon");
+      iconPath.setAttribute('d', 'M-9 3h25a1 1 0 0017 13v30H0Z');
     }
 
   }
