@@ -1,7 +1,6 @@
 ---
 import HeaderLink from "./Navigation/HeaderLink.astro";
 import ThemeSwitch from "./Navigation/ThemeSwitch.astro";
-import { SITE_TITLE } from "../consts";
 ---
 
 <header class="container" >
@@ -14,11 +13,8 @@ import { SITE_TITLE } from "../consts";
       <li><HeaderLink href="/blog">blog</HeaderLink></li>
       <li><HeaderLink href="/about">about</HeaderLink></li>
     </ul>
-
-    
     <ul class="utility-menu">
-      <!-- Menu Button - make into subcomponent -->
-      <li class="toggle md-hide">
+      <li class="md-hide toggle">
         <a class="contrast" href="#"
           ><svg class="menu-icon" viewBox="0 0 100 100" width="50">
             <path
@@ -30,8 +26,7 @@ import { SITE_TITLE } from "../consts";
               class="line bottom"
               d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20"
             ></path>
-          </svg></a
-        >
+          </svg></a>
       </li>
       <li>
         <ThemeSwitch  />
@@ -42,178 +37,185 @@ import { SITE_TITLE } from "../consts";
 
 <style lang="scss">
 header {
-	position: sticky;
-	top: 0;
-	z-index: 1000;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .header-title {
-	letter-spacing: -1px;
-	font-size: 1.5em;
-}
-
-nav {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-wrap: wrap;
-  background-color: var(--pico-background-color);
-}
-
-.menu {
-	display: flex;
-	align-items: center;
-	//justify-content: space-between;
-	justify-content: flex-start;
-	flex-grow: 0;
+    letter-spacing: -1px;
+    font-size: 1.5em;
 }
 
 .links {
-	display: flex;
-	list-style-type: none;
-	padding: 0;
-  justify-content: flex-end; 
-	//flex-basis: 100%;
-	order: 2;
-  margin-left: auto;
-	li {
-		margin-left: 10px;
-	}
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    justify-content: flex-end;
+    margin-left: auto;
+    order: 2;
 
-	li:first-child {
-		margin-left: 0;
-	}
+    li {
+        margin-left: 10px;
+    }
 
-	.current {
-		text-decoration: underline;
-	}
+    li:first-child {
+        margin-left: 0;
+    }
+
+    .current {
+        text-decoration: underline;
+    }
+}
+
+.menu {
+    align-items: center;
+    display: flex;
+    flex-grow: 0;
+}
+
+nav {
+    align-items: center;
+    background-color: var(--pico-background-color);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
 }
 
 .utility-menu {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end; // Align to the right
-	order: 2;
-	flex-grow: 0;
+    align-items: center;
+    display: flex;
+    flex-grow: 0;
+    justify-content: flex-end;
+    order: 2;
 }
 
 .toggle {
-	.menu-icon {
-		cursor: pointer;
-		-webkit-tap-highlight-color: transparent;
-		transition: transform 400ms;
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
+    .menu-icon {
+        cursor: pointer;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        transition: transform 400ms;
 
-		& .top {
-			stroke-dasharray: 40 121;
-		}
+        & .top {
+            stroke-dasharray: 40 121;
+        }
 
-		& .bottom {
-			stroke-dasharray: 40 121;
-		}
+        & .bottom {
+            stroke-dasharray: 40 121;
+        }
 
-		.line {
-			fill: none;
-			transition:
-				stroke-dasharray 400ms,
-				stroke-dashoffset 400ms;
-			stroke: currentColor;
-			stroke-width: 3.5;
-			stroke-linecap: round;
-		}
-	}
+        .line {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+        }
+    }
 
-	&.active {
-		.menu-icon {
-			transform: rotate(45deg);
-		}
+    &.active {
+        .menu-icon {
+            transform: rotate(45deg);
+        }
 
-		.menu-icon .top {
-			stroke-dashoffset: -68px;
-		}
+        .menu-icon .bottom {
+            stroke-dashoffset: -68px;
+        }
 
-		.menu-icon .bottom {
-			stroke-dashoffset: -68px;
-		}
-	}
+        .menu-icon .top {
+            stroke-dashoffset: -68px;
+        }
+    }
 }
 
-
 @media (max-width: 768px) {
-	body>header {
-		padding-block: 0;
-	}
+    body>header {
+        padding-block: 0;
+    }
 
-	header {
-		padding-left: 0;
-		padding-right: 0;
-	}
+    header {
+        padding-left: 0;
+        padding-right: 0;
+    }
 
-	nav {
-		align-items: normal;
-		flex-direction: row;
+    .links {
+        background: var(--pico-contrast-background);
+        display: flex;
+        flex-basis: 100%;
+        flex-direction: column;
+        margin-left: 0;
+        max-height: 0;
+        order: 2;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
 
-		.menu,
-		.utility-menu {
-			order: 1; // Display at the top on mobile
-      flex-basis: auto;
-		}
+        &.open {
+            max-height: 100vh;
+        }
 
-		ul {
-			padding-left: 10px;
-			padding-right: 10px;
-			margin-right: 0;
-		}
+        li {
+            width: 100%;
+            margin-left: 0;
 
-	}
-  
-	.links {
-		display: flex;
-		background: #1f1f1f;
-    background: light-dark(#1f1f1f, #ffffff); //TODO
-		flex-direction: column;
-		max-height: 0;
-		transition: max-height 0.3s ease-in-out;
-		overflow: hidden;
-		order: 2;
-    margin-left: 0;
-    flex-basis: 100%;
-		&.open {
-			max-height: 100vh;
-		}
+            a {
+                color: var(--pico-contrast-inverse);
+                font-weight: bold;
+            }
+        }
+    }
 
-		li {
-			width: 100%;
-			margin-left: 0;
+    .menu,
+    .utility-menu {
+        flex-basis: auto;
+        order: 1; // Displays at the top on mobile 
+    }
 
-			a {
-        color: light-dark(#ffffff, #1f1f1f);
-				font-weight: bold;
-			}
-		}
-	}
+    nav {
+        align-items: normal;
+        flex-direction: row;
+
+        ul {
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-right: 0;
+        }
+    }
 }
 </style>
 
 <script>
-  function toggleMenu() {
+
+// Toggles the mobile navigation menu and 
+// animates the hamburger icon
+
+ function toggleMenu() {
+
     const toggleButton = document.querySelector(".toggle");
+	const links = document.getElementById("links");
 
     toggleButton.addEventListener("click", function (event) {
-      event.preventDefault(); // Prevent default link behavior
-      const links = document.getElementById("links");
+
+      event.preventDefault();
       toggleButton.classList.toggle("active");
       links.classList.toggle("open");
+
     });
   }
+
   document.addEventListener("DOMContentLoaded", (event) => {
+
     toggleMenu();
+
   });
 
   document.addEventListener("astro:after-swap", () => {
+
     toggleMenu();
+
   });
 </script>

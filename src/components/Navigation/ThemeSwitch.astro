@@ -1,4 +1,4 @@
-<a class="contrast" aria-label="Turn on dark mode" href="#"
+<a class="contrast" aria-label="Toggle dark mode" href="#"
   ><svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -17,16 +17,12 @@
       >
       </path>
     </g>
-  </svg></a
->
+  </svg></a>
 <style lang="scss">
+  // Theme toggle icon - taken from Pico.css official documentation site
+  
   svg.icon-theme-toggle {
     --theme-toggle-duration: 0.4s;
-  }
-
-  svg.icon-theme-toggle.moon g circle {
-    transform: scale(1.4);
-    transition-delay: 0s;
   }
 
   svg.icon-theme-toggle g circle,
@@ -34,6 +30,11 @@
     transform-origin: center;
     transition: transform calc(var(--theme-toggle-duration) * 0.65)
       cubic-bezier(0, 0, 0, 1.25) calc(var(--theme-toggle-duration) * 0.35);
+  }
+
+  svg.icon-theme-toggle.moon g circle {
+    transform: scale(1.4);
+    transition-delay: 0s;
   }
 
   svg.icon-theme-toggle.moon g path {
@@ -54,6 +55,7 @@
   }
 </style>
 <script>
+  // Toggles theme and theme switch icon then stores theme in local storage
   function toggleTheme() {
 
     const themeButton = document.querySelector(".icon-theme-toggle");
@@ -61,28 +63,23 @@
     themeButton.addEventListener("click", function (event) {
 
       event.preventDefault();
-
       themeButton.classList.toggle("moon");
-
       const theme = themeButton.classList.contains("moon") ? "dark" : "light";
-
       localStorage.setItem("theme", theme);
-
       document.documentElement.setAttribute("data-theme", theme);
+
     });
 
   }
 
+  // Sets theme based on local storage
   function setDarkMode(document) {
 
     let storedTheme = localStorage.getItem("theme");
-
     document.documentElement.setAttribute("data-theme", storedTheme);
 
     if (storedTheme === "dark") {
-
       document.querySelector(".icon-theme-toggle").classList.add("moon");
-    
     }
 
   }
